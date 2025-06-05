@@ -1,18 +1,25 @@
 
-function makeColorGrid(color_list) {
-    let color_grid_container = document.getElementById("color_grid_container");
+// Toggles the visibility of the color-choosing panel
+function toggleColors() {
+  let colors_mask = document.getElementById("colors_mask");
+  colors_mask.classList.toggle("flex");
+}
 
-    for (let i = 0; i < color_list.length; i++) { // For group of colors
-        let row = document.createElement("div");
-        row.classList.add("color_grid_row");
-        for (let j = 0; j < color_list[i].length; j++) { // Color in group
-            let new_color = document.createElement("div");
-            new_color.classList.add("color");
-            new_color.style.backgroundColor = color_list[i][j];
-            row.appendChild(new_color);
-        }
-        color_grid_container.appendChild(row);
-    }
+// Create the grid of colors to choose from given a list of sublists of colors
+function makeColorGrid(color_list) {
+  let color_grid_container = document.getElementById("color_grid");
+
+  for (let i = 0; i < color_list.length; i++) { // For group of colors
+      let row = document.createElement("div");
+      row.classList.add("color_grid_row");
+      for (let j = 0; j < color_list[i].length; j++) { // Color in group
+          let new_color = document.createElement("div");
+          new_color.classList.add("color");
+          new_color.style.backgroundColor = color_list[i][j];
+          row.appendChild(new_color);
+      }
+      color_grid_container.appendChild(row);
+  }
 }
 
 const color_list = [
@@ -46,5 +53,6 @@ const color_list = [
     /* Skin Tones */ [
       "#FFE0C1", "#F1C27D", "#E0AC69", "#C68642", "#8D5524", "#5C3A1C"
     ]
-  ];
+];
+
 makeColorGrid(color_list);

@@ -3,20 +3,24 @@
     <head>
         <title>Kumihimo Designer</title>
         <link href="./styles.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="./script.js" defer></script>
     </head>
     <body>
-        <div id="colors">
-            <div id="color_grid_container">
-                <div id="color_grid"></div>
-            </div>
-            <div id="color_header">
-                <div id="recent_colors">
-                    <div class="recent_color"></div>
-                    <div class="recent_color"></div>
-                    <div class="recent_color"></div>
+        <button onclick="toggleColors()">Change Color</button>
+        <div id="colors_mask">
+            <div id="colors">
+                <div id="color_grid_container">
+                    <div id="color_grid"></div>
                 </div>
-                <button id="close_colors">Close</button>
+                <div id="color_header">
+                    <div id="recent_colors_container">
+                        <div id="recent_colors">
+                            <div class="recent_color"></div>
+                        </div>
+                    </div>
+                    <button id="close_colors" onclick="toggleColors()">Close</button>
+                </div>
             </div>
         </div>
     </body>
