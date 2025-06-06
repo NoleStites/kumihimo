@@ -3,6 +3,24 @@
 function toggleColors() {
   let colors_mask = document.getElementById("colors_mask");
   colors_mask.classList.toggle("flex");
+
+  let grid_container = document.getElementById("color_grid_container");
+  let grid_width = grid_container.getBoundingClientRect();
+  let color_header = document.getElementById("color_header");
+  color_header.style.maxWidth = grid_width['width'] + 'px';
+}
+
+function createRecentColor(color) {
+  let container = document.getElementById("recent_colors");
+  let new_recent = document.createElement("div");
+  new_recent.classList.add("recent_color");
+  new_recent.style.backgroundColor = color;
+  container.appendChild(new_recent)
+}
+
+function selectColor(color) {
+  createRecentColor(color);
+  current_color = color;
 }
 
 // Create the grid of colors to choose from given a list of sublists of colors
@@ -16,10 +34,22 @@ function makeColorGrid(color_list) {
           let new_color = document.createElement("div");
           new_color.classList.add("color");
           new_color.style.backgroundColor = color_list[i][j];
+
+          // Click logic
+          new_color.addEventListener("click", function() {
+            selectColor(color_list[i][j]);
+          });
+
           row.appendChild(new_color);
       }
       color_grid_container.appendChild(row);
   }
+
+  // set size of recent colors and close btn based off of color grid
+  let grid_container = document.getElementById("color_grid_container");
+  let grid_width = grid_container.getBoundingClientRect();
+  let color_header = document.getElementById("color_header");
+  color_header.style.width = grid_width;
 }
 
 const color_list = [
@@ -54,5 +84,6 @@ const color_list = [
       "#FFE0C1", "#F1C27D", "#E0AC69", "#C68642", "#8D5524", "#5C3A1C"
     ]
 ];
+var current_color;
 
 makeColorGrid(color_list);
