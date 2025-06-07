@@ -1,19 +1,3 @@
-:root {
-    --color_cell_size: 75px;
-    --color_cell_border: 1px;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    width: 100vw;
-    height: 100vh;
-}
-
 #colors_mask {
     width: 100%;
     height: 100%;
@@ -22,7 +6,7 @@ body {
     align-items: center;
     overflow: auto;
     position: absolute;
-    z-index: 5;
+    z-index: 100;
     top: 0;
     left: 0;
 }
@@ -118,8 +102,4 @@ body {
     width: 100%;
     padding: 20px;
     font-size: 30pt;
-}
-
-@media only screen and (max-width: 375px) {
-
 }

@@ -2,12 +2,14 @@
 <html>
     <head>
         <title>Kumihimo Designer</title>
-        <link href="./styles.css" rel="stylesheet" />
+        <link href="./stylesheets/styles.css" rel="stylesheet" />
+        <link href="./stylesheets/color_picker.css" rel="stylesheet" />
+        <link href="./stylesheets/pattern_preview.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="./script.js" defer></script>
+        <script src="./scripts/color_picker.js" defer></script>
+        <script src="./scripts/pattern_preview.js" defer></script>
     </head>
     <body>
-        <button onclick="toggleColors()">Change Color</button>
         <div id="colors_mask">
             <div id="colors">
                 <div id="color_grid_container">
@@ -21,5 +23,8 @@
                 </div>
             </div>
         </div>
+
+        <button onclick="toggleColors()">Change Color</button>
+        <section id="pattern_preview"></section>
     </body>
 </html>
