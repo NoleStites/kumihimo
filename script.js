@@ -15,7 +15,17 @@ function createRecentColor(color) {
   let new_recent = document.createElement("div");
   new_recent.classList.add("recent_color");
   new_recent.style.backgroundColor = color;
-  container.appendChild(new_recent)
+
+  // Click logic
+  new_recent.addEventListener("click", function() {
+    current_color = color;
+  });
+  container.appendChild(new_recent);
+
+  // Do not let recent colors exceed the threshold
+  if (container.children.length > 10) {
+    container.removeChild(container.childNodes[0]);
+  };
 }
 
 function selectColor(color) {
@@ -45,7 +55,6 @@ function makeColorGrid(color_list) {
       color_grid_container.appendChild(row);
   }
 
-  // set size of recent colors and close btn based off of color grid
   let grid_container = document.getElementById("color_grid_container");
   let grid_width = grid_container.getBoundingClientRect();
   let color_header = document.getElementById("color_header");

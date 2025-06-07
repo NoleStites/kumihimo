@@ -75,7 +75,7 @@ body {
 }
 
 #color_header {
-    /* width: 50%; */
+    min-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
