@@ -13,7 +13,6 @@
 .preview_row {
     position: relative;
     width: 100%;
-    /* background-color: rgba(173, 216, 230, 0.439); */
 }
 
 .preview_row:nth-child(odd) {
@@ -24,9 +23,13 @@
     position: relative;
     width: var(--preview_cell_width);
     aspect-ratio: 1/1;
-    /* background-color: rgba(216, 112, 147, 0.321); */
     background-color: cadetblue;
     border: 2px solid black;
     float: left;
     border-radius: 50%;
+    text-align: center;
+}
+
+.cell_0 {
+    background-color: red;
 }
