@@ -93,6 +93,6 @@ const color_list = [
       "#FFE0C1", "#F1C27D", "#E0AC69", "#C68642", "#8D5524", "#5C3A1C"
     ]
 ];
-var current_color;
+var current_color = "red";
 
 makeColorGrid(color_list);

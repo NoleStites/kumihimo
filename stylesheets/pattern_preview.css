@@ -15,7 +15,6 @@
 .preview_row {
     position: relative;
     width: fit-content;
-    background-color: rgba(0, 0, 0, 0.373);
 }
 
 .preview_row:nth-child(odd) {
@@ -26,13 +25,9 @@
     position: relative;
     width: var(--preview_cell_width);
     aspect-ratio: 1/1;
-    background-color: cadetblue;
+    background-color: lightgray;
     border: 2px solid black;
     float: left;
     border-radius: 50%;
     text-align: center;
-}
-
-.cell_0 {
-    background-color: red;
 }

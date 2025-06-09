@@ -45,8 +45,10 @@ function createPatternPreview(columns, rows, cell_overlap, row_overlap, strings)
         
             if (curr_class_row == -1) {curr_class_row = 4 - 1;}
             let class_num = color_class_values[curr_class_row][cell_to_access];
-            new_cell.innerText = class_num;
-            new_cell.classList.add(`cell_${class_num}`);
+            // new_cell.innerText = class_num;
+            let class_name = `cell_${class_num}`;
+            new_cell.classList.add(class_name);
+            new_cell.addEventListener("click", function() {assignColorToCell(class_name)});
 
             new_row.appendChild(new_cell);
         }
@@ -65,6 +67,14 @@ function adjustPreviewBoxSize(cell_width, row_overlap, rows) {
         new_height = (cell_width*Math.ceil(rows/2)) + Math.floor(rows/2)*(cell_width-(2*row_overlap));
     }
     preview_box.style.height = new_height + 'px';
+}
+
+// Assigns the chosen color to the selected cell and all of its classmates
+function assignColorToCell(class_name) {
+    let cells = document.getElementsByClassName(class_name);
+    for (cell of cells) {
+        cell.style.backgroundColor = current_color;
+    }
 }
 
 let styles = window.getComputedStyle(document.body);
