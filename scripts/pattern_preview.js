@@ -54,15 +54,28 @@ function createPatternPreview(columns, rows, cell_overlap, row_overlap, strings)
     }
 }
 
+function adjustPreviewBoxSize(cell_width, row_overlap, rows) {
+    let preview_box = document.getElementById("pattern_preview");
+
+    // Calculate height
+    let new_height;
+    if (rows % 2 == 0) {
+        new_height = (cell_width*rows/2) + ((rows/2) - 1)*(cell_width-(2*row_overlap)) + (cell_width-row_overlap);
+    } else {
+        new_height = (cell_width*Math.ceil(rows/2)) + Math.floor(rows/2)*(cell_width-(2*row_overlap));
+    }
+    preview_box.style.height = new_height + 'px';
+}
+
 let styles = window.getComputedStyle(document.body);
 
-let cell_overlap = Number(styles.getPropertyValue('--cell_overlap').slice(0,-2));
-let row_overlap = 15;
+var cell_width = Number(styles.getPropertyValue('--preview_cell_width').slice(0,-2));
+var cell_overlap = Number(styles.getPropertyValue('--cell_overlap').slice(0,-2));
+var row_overlap = Number(styles.getPropertyValue('--row_overlap').slice(0,-2));
 let columns = 8;
 let rows = 15;
 let strings = 16; // The number of pairs placed around the disc (16 is standard) (+/-4)
 createPatternPreview(columns, rows, cell_overlap, row_overlap, strings);
 
-// 16 => 4x4
-// 12 => 3x4
-// 8 => 2x4
+// Adjust height and width of preview box to fit contents
+adjustPreviewBoxSize(cell_width, row_overlap, rows);
