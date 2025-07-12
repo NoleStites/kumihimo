@@ -77,6 +77,32 @@ function assignColorToCell(class_name) {
     }
 }
 
+// Minimum strings: 8
+function removeStrings() {
+    if (strings > 8) {
+        strings -= 4;
+        let preview_section = document.getElementById("pattern_preview");
+        preview_section.innerHTML = "";
+        createPatternPreview(columns, rows, cell_overlap, row_overlap, strings);
+        createDisk(strings);
+        let string_display = document.getElementById("string_count");
+        string_display.innerText = strings;
+    }
+}
+
+// Maximum strings: 40
+function addStrings() {
+    if (strings < 40) {
+        strings += 4;
+        let preview_section = document.getElementById("pattern_preview");
+        preview_section.innerHTML = "";
+        createPatternPreview(columns, rows, cell_overlap, row_overlap, strings);
+        createDisk(strings);
+        let string_display = document.getElementById("string_count");
+        string_display.innerText = strings;
+    }
+}
+
 let styles = window.getComputedStyle(document.body);
 
 var cell_width = Number(styles.getPropertyValue('--preview_cell_width').slice(0,-2));
@@ -89,3 +115,6 @@ createPatternPreview(columns, rows, cell_overlap, row_overlap, strings);
 
 // Adjust height and width of preview box to fit contents
 adjustPreviewBoxSize(cell_width, row_overlap, rows);
+
+// Create the default disk
+createDisk(strings);

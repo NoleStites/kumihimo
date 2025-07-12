@@ -19,6 +19,10 @@ function createRecentColor(color) {
   // Click logic
   new_recent.addEventListener("click", function() {
     current_color = color;
+    for (cell of document.getElementsByClassName("selected")) {
+      cell.classList.toggle("selected");
+    }
+    new_recent.classList.toggle("selected");
   });
   container.appendChild(new_recent);
 
@@ -29,7 +33,9 @@ function createRecentColor(color) {
 }
 
 function selectColor(color) {
-  createRecentColor(color);
+  if (color != current_color) {
+    createRecentColor(color);
+  }
   current_color = color;
 }
 
@@ -48,6 +54,11 @@ function makeColorGrid(color_list) {
           // Click logic
           new_color.addEventListener("click", function() {
             selectColor(color_list[i][j]);
+            for (cell of document.getElementsByClassName("selected")) {
+              cell.classList.toggle("selected");
+            }
+            new_color.classList.toggle("selected");
+
           });
 
           row.appendChild(new_color);

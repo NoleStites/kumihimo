@@ -5,8 +5,10 @@
         <link href="./stylesheets/styles.css" rel="stylesheet" />
         <link href="./stylesheets/color_picker.css" rel="stylesheet" />
         <link href="./stylesheets/pattern_preview.css" rel="stylesheet" />
+        <link href="./stylesheets/disk.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="./scripts/color_picker.js" defer></script>
+        <script src="./scripts/disk.js" defer></script>
         <script src="./scripts/pattern_preview.js" defer></script>
     </head>
     <body>
@@ -17,14 +19,33 @@
                 </div>
                 <div id="color_header">
                     <div id="recent_colors_container">
-                        <div id="recent_colors"></div>
+                        <div id="recent_colors">
+                            <div id="placeholder" class="recent_color hidden"></div>
+                        </div>
                     </div>
                     <button id="close_colors" onclick="toggleColors()">Close</button>
                 </div>
             </div>
         </div>
 
-        <button onclick="toggleColors()">Change Color</button>
-        <section id="pattern_preview"></section>
+        <h1 id="page_title">Kumihimo Designer</h1>
+
+        <div id="pattern_container">
+            <section id="pattern_preview"></section>
+            <div id="disk_container">
+                <div id="center_circle"></div>
+                <div id="disk"></div>
+            </div>
+        </div>
+        <div id="btn_container">
+            <div id="string_btns">
+                <button onclick="addStrings()" class="flex_btn">Add Strings</button>
+                <div id="string_count_container"><div id="string_count">16</div></div>
+                <button onclick="removeStrings()" class="flex_btn">Remove Strings</button>
+            </div>
+            <div id="color_btns">
+                <button onclick="toggleColors()" class="flex_btn">Change Color</button>
+            </div>
+        </div>
     </body>
 </html>
