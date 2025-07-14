@@ -12,7 +12,7 @@
         <script src="./scripts/pattern_preview.js" defer></script>
     </head>
     <body>
-        <div id="colors_mask">
+        <div id="colors_mask" class="mask">
             <div id="colors">
                 <div id="color_grid_container">
                     <div id="color_grid"></div>
@@ -28,14 +28,18 @@
             </div>
         </div>
 
-        <h1 id="page_title">Kumihimo Designer</h1>
-
-        <div id="pattern_container">
-            <section id="pattern_preview"></section>
+        <div id="disk_mask" class="mask">
             <div id="disk_container">
                 <div id="center_circle"></div>
                 <div id="disk"></div>
             </div>
+            <button id="close_disk" class="flex_btn" onclick="toggleDisk()">Close</button>
+        </div>
+
+        <h1 id="page_title">Kumihimo Designer</h1>
+
+        <div id="pattern_container">
+            <section id="pattern_preview"></section>
         </div>
         <div id="btn_container">
             <div id="string_btns">
@@ -44,6 +48,7 @@
                 <button onclick="removeStrings()" class="flex_btn">Remove Strings</button>
             </div>
             <div id="color_btns">
+                <button onclick="toggleDisk()" class="flex_btn">Show Disk</button>
                 <button onclick="toggleColors()" class="flex_btn">Change Color</button>
             </div>
         </div>

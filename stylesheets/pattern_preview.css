@@ -5,24 +5,27 @@
 }
 
 #pattern_preview {
-    width: fit-content;
-    /* height: auto; */
+    position: relative;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    outline: 1px solid black;
+    flex-shrink: 0;
+    flex-grow: 0;
+    left: calc(var(--cell_overlap)/-2);
 }
 
 .preview_row {
-    position: relative;
-    width: fit-content;
+    position: absolute;
+    height: var(--preview_cell_width);
 }
 
 .preview_row:nth-child(odd) {
-    left: calc(var(--preview_cell_width)/2 - var(--cell_overlap)/2);
+    left: calc(var(--preview_cell_width)/2 - var(--row_overlap)/2);
 }
 
 .preview_cell {
-    position: relative;
+    box-sizing: border-box;
+    position: absolute;
     width: var(--preview_cell_width);
     aspect-ratio: 1/1;
     background-color: rgb(18, 179, 168);

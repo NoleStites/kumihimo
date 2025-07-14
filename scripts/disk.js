@@ -1,3 +1,9 @@
+// Toggles the visibility of the disk panel
+function toggleDisk() {
+    let disk_mask = document.getElementById("disk_mask");
+    disk_mask.classList.toggle("flex");
+}
+
 // Function to create and position segments
 function createDisk(strings) {
     const kumihimoDisk = document.getElementById('disk');

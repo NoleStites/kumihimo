@@ -1,4 +1,4 @@
-function createPatternPreview(columns, rows, cell_overlap, row_overlap, strings) {
+function createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings) {
     let preview_section = document.getElementById("pattern_preview");
     strings /= 4;
 
@@ -27,15 +27,16 @@ function createPatternPreview(columns, rows, cell_overlap, row_overlap, strings)
         // Create the row
         let new_row = document.createElement("div");
         new_row.classList.add("preview_row");
-        new_row.style.top = -row_overlap * i + 'px';
+        new_row.style.top = cell_width*i + - row_overlap*i + 'px';
         new_row.style.zIndex = i;
+        new_row.style.width = ((cell_width - cell_overlap) * (columns - 1) + cell_width) + 'px';
 
         // Create cells in row
         let curr_class_row = start_class_row;
         for (let j = 0; j < columns; j++) {
             let new_cell = document.createElement("div");
             new_cell.classList.add("preview_cell");
-            new_cell.style.right = cell_overlap*j + 'px';
+            new_cell.style.left = cell_width*j - cell_overlap*j + 'px';
             new_cell.style.zIndex = j;
 
             let cell_to_access = ((j+start_color_offset) % strings);
@@ -54,6 +55,10 @@ function createPatternPreview(columns, rows, cell_overlap, row_overlap, strings)
         }
         preview_section.appendChild(new_row);
     }
+
+    let row_width = document.getElementsByClassName("preview_row")[0].style.width;
+    preview_section.style.width = row_width;
+    // preview_section.style.height = "20px";
 }
 
 function adjustPreviewBoxSize(cell_width, row_overlap, rows) {
@@ -83,7 +88,7 @@ function removeStrings() {
         strings -= 4;
         let preview_section = document.getElementById("pattern_preview");
         preview_section.innerHTML = "";
-        createPatternPreview(columns, rows, cell_overlap, row_overlap, strings);
+        createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings);
         createDisk(strings);
         let string_display = document.getElementById("string_count");
         string_display.innerText = strings;
@@ -96,7 +101,7 @@ function addStrings() {
         strings += 4;
         let preview_section = document.getElementById("pattern_preview");
         preview_section.innerHTML = "";
-        createPatternPreview(columns, rows, cell_overlap, row_overlap, strings);
+        createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings);
         createDisk(strings);
         let string_display = document.getElementById("string_count");
         string_display.innerText = strings;
@@ -111,7 +116,7 @@ var row_overlap = Number(styles.getPropertyValue('--row_overlap').slice(0,-2));
 let columns = 8;
 let rows = 15;
 let strings = 16; // The number of pairs placed around the disc (16 is standard) (+/-4)
-createPatternPreview(columns, rows, cell_overlap, row_overlap, strings);
+createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings);
 
 // Adjust height and width of preview box to fit contents
 adjustPreviewBoxSize(cell_width, row_overlap, rows);
