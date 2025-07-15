@@ -1,3 +1,10 @@
+function setRealVh() {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+window.addEventListener('resize', setRealVh);
+setRealVh();
 
 // Toggles the visibility of the color-choosing panel
 function toggleColors() {
