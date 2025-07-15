@@ -17,7 +17,7 @@
 }
 
 #disk_container {
-    width: 80vmin;
+    width: 90%;
     aspect-ratio: 1/1;
     position: relative;
     display: flex;
