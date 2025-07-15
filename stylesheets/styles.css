@@ -19,7 +19,7 @@ body {
     width: 100vw;
     max-width: 800px;
     /* height: 100vh; */
-    height: calc(var(--vh, 1vh) * 100);
+    /* height: calc(var(--vh, 1vh) * 100); */
     padding: 0px 15px;
     font-family: sans-serif;
     /* background-color: rgb(236, 236, 236); */
