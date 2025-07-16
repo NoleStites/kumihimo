@@ -28,11 +28,12 @@ body {
     text-align: center;
     padding: 10px;
     font-size: 30pt;
+    color: white;
     border-bottom: 1px solid rgb(153, 153, 153);
 }
 
 #page_title, #btn_container {
-    background-color: rgb(224, 224, 224);
+    background-color: rgb(125, 0, 77);
 }
 
 #pattern_container {
@@ -82,7 +83,7 @@ body {
 }
 #string_count {
     font-size: 20pt;
-    color: black;
+    color: white;
     font-weight: bold;
 }
 

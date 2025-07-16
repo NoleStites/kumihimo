@@ -88,12 +88,9 @@ function assignColorToCell(class_name) {
 // Assigns the colors in the class_color dict to their given classes
 function assignClassColors() {
     const keys = Object.keys(class_colors);
-    console.log(class_colors);
-    console.log(`Keys: ${keys}`);
     let curr_current_color = current_color; // Remember the current color
     for (let key of keys) { // cell_0, cell_1, ...
         current_color = class_colors[key];
-        console.log(key);
         assignColorToCell(key);
     }
     // Reset current color
