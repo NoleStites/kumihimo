@@ -1,5 +1,6 @@
 :root {
-    --preview_cell_width: 60px;
+    /* --preview_cell_width: 60px; */
+    --preview_cell_width: 52px;
     --cell_overlap: 12px;
     --row_overlap: 15px;
 }
@@ -28,7 +29,7 @@
     position: absolute;
     width: var(--preview_cell_width);
     aspect-ratio: 1/1;
-    background-color: rgb(18, 179, 168);
+    background-color: rgb(153, 204, 255);
     border: 2px solid rgb(49, 49, 49);
     float: left;
     border-radius: 50%;

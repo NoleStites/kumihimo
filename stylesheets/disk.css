@@ -6,7 +6,7 @@
 #disk_mask {
     flex-direction: column;
     justify-content: space-between;
-    padding: 50px;
+    padding: 30px;
     background-color: rgb(236, 236, 236);
 }
 
@@ -17,7 +17,7 @@
 }
 
 #disk_container {
-    width: 90%;
+    width: 100%;
     aspect-ratio: 1/1;
     position: relative;
     display: flex;

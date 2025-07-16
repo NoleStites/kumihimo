@@ -80,6 +80,24 @@ function assignColorToCell(class_name) {
     for (cell of cells) {
         cell.style.backgroundColor = current_color;
     }
+
+    // Assign color to class_color dict
+    class_colors[class_name] = current_color;
+}
+
+// Assigns the colors in the class_color dict to their given classes
+function assignClassColors() {
+    const keys = Object.keys(class_colors);
+    console.log(class_colors);
+    console.log(`Keys: ${keys}`);
+    let curr_current_color = current_color; // Remember the current color
+    for (let key of keys) { // cell_0, cell_1, ...
+        current_color = class_colors[key];
+        console.log(key);
+        assignColorToCell(key);
+    }
+    // Reset current color
+    current_color = curr_current_color;
 }
 
 // Minimum strings: 8
@@ -92,6 +110,7 @@ function removeStrings() {
         createDisk(strings);
         let string_display = document.getElementById("string_count");
         string_display.innerText = strings;
+        assignClassColors();
     }
 }
 
@@ -105,6 +124,7 @@ function addStrings() {
         createDisk(strings);
         let string_display = document.getElementById("string_count");
         string_display.innerText = strings;
+        assignClassColors();
     }
 }
 
@@ -116,10 +136,27 @@ var row_overlap = Number(styles.getPropertyValue('--row_overlap').slice(0,-2));
 let columns = 8;
 let rows = 15;
 let strings = 16; // The number of pairs placed around the disc (16 is standard) (+/-4)
-createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings);
 
-// Adjust height and width of preview box to fit contents
-adjustPreviewBoxSize(cell_width, row_overlap, rows);
+// Maps cell class name "cell_X" to color for that class
+var class_colors = { // deafult: flower pattern
+    "cell_1": "#FF3396",
+    "cell_10": "#FF3396",
+    "cell_11": "#FF3396",
+    "cell_2": "#FF3396",
+    "cell_5": "#FF3396",
+    "cell_6": "#FFEB3B",
+    "cell_7": "#FF3396"
+}
 
-// Create the default disk
-createDisk(strings);
+window.onload = function() {
+    createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings);
+
+    // Adjust height and width of preview box to fit contents
+    adjustPreviewBoxSize(cell_width, row_overlap, rows);
+    
+    // Create the default disk
+    createDisk(strings);
+
+    // Show default flower pattern
+    assignClassColors();
+}
