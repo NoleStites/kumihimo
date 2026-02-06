@@ -63,6 +63,7 @@ function createDisk(strings) {
 
         let next_class = prev_class + quarter + 1;
         seg1.classList.add(`cell_${next_class}`);
+        seg1.addEventListener("click", function() {assignColorToCell(seg1.classList[1])});
         prev_class = next_class;
 
         seg1.dataset.segmentIndex = 2*i; // Store the index for easy reference
@@ -73,6 +74,7 @@ function createDisk(strings) {
 
         next_class = prev_class - quarter;
         seg2.classList.add(`cell_${next_class}`);
+        seg2.addEventListener("click", function() {assignColorToCell(seg2.classList[1])});
         prev_class = next_class;
 
         seg2.dataset.segmentIndex = 2*i + 1; // Store the index for easy reference
