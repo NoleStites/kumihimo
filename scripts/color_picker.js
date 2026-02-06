@@ -22,6 +22,7 @@ function createRecentColor(color) {
   let container = document.getElementById("recent_colors");
   let new_recent = document.createElement("div");
   new_recent.classList.add("recent_color");
+  new_recent.classList.toggle("selected");
   new_recent.style.backgroundColor = color;
 
   // Click logic
@@ -61,11 +62,10 @@ function makeColorGrid(color_list) {
 
           // Click logic
           new_color.addEventListener("click", function() {
-            selectColor(color_list[i][j]);
             for (cell of document.getElementsByClassName("selected")) {
               cell.classList.toggle("selected");
             }
-            new_color.classList.toggle("selected");
+            selectColor(color_list[i][j]);
 
           });
 
