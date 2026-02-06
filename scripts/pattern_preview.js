@@ -97,6 +97,22 @@ function assignClassColors() {
     current_color = curr_current_color;
 }
 
+// Adjusts the size of the class_colors dict to the number of strings, reusing previous assignments
+function resizeClassColorsDict(prev_string_count, string_count) {
+    let new_dict = {};
+    for (let i = 0; i < string_count; i++)
+    {
+        if (i > prev_string_count-1) { // Adding new color slots, so default color
+            new_dict[`cell_${i}`] = default_color;
+        } 
+        else { // Color slot already exists, so use it
+            new_dict[`cell_${i}`] = class_colors[`cell_${i}`];
+        }
+    }
+
+    class_colors =  new_dict; // Assign new dict
+}
+
 // Minimum strings: 8
 function removeStrings() {
     if (strings > 8) {
@@ -107,6 +123,7 @@ function removeStrings() {
         createDisk(strings);
         let string_display = document.getElementById("string_count");
         string_display.innerText = strings;
+        resizeClassColorsDict(strings+4, strings);
         assignClassColors();
     }
 }
@@ -121,6 +138,7 @@ function addStrings() {
         createDisk(strings);
         let string_display = document.getElementById("string_count");
         string_display.innerText = strings;
+        resizeClassColorsDict(strings-4, strings);
         assignClassColors();
     }
 }
@@ -133,19 +151,30 @@ var row_overlap = Number(styles.getPropertyValue('--row_overlap').slice(0,-2));
 let columns = 8;
 let rows = 15;
 let strings = 16; // The number of pairs placed around the disc (16 is standard) (+/-4)
+let default_color = "#99CCFF";
 
 // Maps cell class name "cell_X" to color for that class
-var class_colors = { // deafult: flower pattern
-    "cell_1": "#FF3396",
-    "cell_10": "#FF3396",
-    "cell_11": "#FF3396",
-    "cell_2": "#FF3396",
-    "cell_5": "#FF3396",
-    "cell_6": "#FFEB3B",
-    "cell_7": "#FF3396"
+var class_colors = {};
+
+// Define the positions of default flower pattern
+let flower_pedals = [1, 2, 5, 7, 10, 11];
+let flower_center = 6;
+
+// Initialize the class_colors dict (each string gets the default color)
+for (let i = 0; i < strings; i++)
+{
+    if (flower_pedals.includes(i)) {
+        class_colors[`cell_${i}`] = "#FF3396";
+    }
+    else if (i == flower_center) {
+        class_colors[`cell_${i}`] = "#FFEB3B";
+    }
+    else {
+        class_colors[`cell_${i}`] = default_color;
+    }
 }
 
-window.onload = function() {
+// window.onload = function() {
     createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings);
 
     // Adjust height and width of preview box to fit contents
@@ -156,4 +185,4 @@ window.onload = function() {
 
     // Show default flower pattern
     assignClassColors();
-}
+// }
