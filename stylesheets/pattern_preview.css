@@ -5,6 +5,10 @@
     --row_overlap: 15px;
 }
 
+.is_previewed {
+    display: block;
+}
+
 #pattern_preview {
     position: relative;
     height: 100%;
@@ -13,6 +17,46 @@
     flex-shrink: 0;
     flex-grow: 0;
     left: calc(var(--cell_overlap)/-2);
+    display: none;
+}
+
+#hollow_preview {
+    height: 100%;
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: rgba(255, 0, 0, 0.246);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#hollow_preview_two_by_two {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.hollow_preview_row {
+    display: flex;
+    flex-direction: row;
+}
+
+#hollow_flex {
+    display: flex;
+    flex-direction: column;
+    transform: rotate(45deg);
+}
+
+.hollow_row {
+    display: flex;
+    background-color: green;
+}
+.hollow_cell {
+    width: 40px;
+    aspect-ratio: 1/1;
+    background-color: white; 
+    border: 1px solid black; 
+    text-align: center;
+    line-height: 50px; 
 }
 
 .preview_row {

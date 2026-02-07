@@ -1,3 +1,4 @@
+// Spiral preview
 function createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings) {
     let preview_section = document.getElementById("pattern_preview");
     strings /= 4;
@@ -60,6 +61,94 @@ function createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_wid
     preview_section.style.width = row_width;
     // preview_section.style.height = "20px";
 }
+
+// Hollow preview
+function createHollowPreview(strings)
+{
+    // Define a tileable hollow preview (hollow_flex)
+    // let hollow_flex = document.getElementById("hollow_flex");
+    let hollow_flex = document.createElement("div");
+    hollow_flex.classList.add("hollow_flex");
+    let cells_in_width = Math.floor(strings / 2);
+
+    let first_start_value = 4;
+    let second_start_value = 3;
+    let start_with_repeat = false;
+
+    for (let i = 0; i < cells_in_width; i++) {
+        let new_row = document.createElement("div");
+        new_row.classList.add("hollow_row");
+
+        for (let j = 0; j < cells_in_width; j++) {
+            // Create cell
+            let new_cell = document.createElement("div");
+            new_cell.classList.add("hollow_cell");
+
+            // Determine cell class
+            let cell_class = 0;
+            if (!start_with_repeat) { // Every other row
+                if (j % 2 == 0) {
+                    cell_class = (first_start_value + (first_start_value*j/2)) % strings;
+                }
+                else {
+                    cell_class = (second_start_value - (4*(i/2))) % strings;
+                    if (cell_class < 0) {
+                        cell_class = strings + cell_class;
+                    }
+                }
+            }
+            else {
+                if (j % 2 == 0) {
+                    cell_class = (second_start_value - 2 - (4*((i-1)/2))) % strings;
+                    if (cell_class < 0) {
+                        cell_class = strings + cell_class;
+                    }
+                } else {
+                    cell_class = (first_start_value + 2 + (first_start_value*(j-1)/2)) % strings;
+                }
+            }
+            // new_cell.innerText = `${cell_class}`;
+            new_cell.classList.add(`cell_${cell_class}`);
+            
+            // Add cell to preview
+            new_row.appendChild(new_cell);
+        }
+        start_with_repeat = !start_with_repeat;
+        hollow_flex.appendChild(new_row);
+    }
+
+    // Clone 3 more hollow tiles
+    let tile2 = hollow_flex.cloneNode(true); // Deep copy
+    let tile3 = hollow_flex.cloneNode(true); // Deep copy
+    let tile4 = hollow_flex.cloneNode(true); // Deep copy
+
+    let hollow_preview_row1 = document.createElement("div");
+    hollow_preview_row1.classList.add("hollow_preview_row");
+    hollow_preview_row1.appendChild(hollow_flex);
+    hollow_preview_row1.appendChild(tile2);
+
+    let hollow_preview_row2 = document.createElement("div");
+    hollow_preview_row2.classList.add("hollow_preview_row");
+    hollow_preview_row2.appendChild(tile3);
+    hollow_preview_row2.appendChild(tile4);
+
+    let big_flex = document.getElementById("hollow_preview_two_by_two");
+    big_flex.appendChild(hollow_preview_row1);
+    big_flex.appendChild(hollow_preview_row2);
+
+    // Add the on-click event listeners to all cells
+    for (let i = 0; i < strings; i++) {
+        let class_cells = document.getElementsByClassName(`cell_${i}`);
+        for (let cell of class_cells) {
+            cell.addEventListener("click", function() {assignColorToCell(cell.classList[1])});
+        }
+    }
+
+}
+
+// Temp function to toggle between spiral and hollow preview
+function swapStructure()
+{}
 
 function adjustPreviewBoxSize(cell_width, row_overlap, rows) {
     let preview_box = document.getElementById("pattern_preview");
@@ -176,6 +265,7 @@ for (let i = 0; i < strings; i++)
 
 // window.onload = function() {
     createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings);
+    createHollowPreview(strings);
 
     // Adjust height and width of preview box to fit contents
     adjustPreviewBoxSize(cell_width, row_overlap, rows);
