@@ -6,9 +6,10 @@
 }
 
 .is_previewed {
-    display: block;
+    display: flex !important;
 }
 
+/* Spiral Braid */
 #pattern_preview {
     position: relative;
     height: 100%;
@@ -20,6 +21,7 @@
     display: none;
 }
 
+/* Hollow Braid */
 #hollow_preview {
     height: 100%;
     width: 100%;
@@ -28,12 +30,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    display: none;
 }
 
-#hollow_preview_two_by_two {
+#hollow_preview_X_by_X {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    transform: rotate(45deg);
+    position: absolute;
+    margin: 0px auto;
 }
 .hollow_preview_row {
     display: flex;
@@ -43,7 +50,6 @@
 #hollow_flex {
     display: flex;
     flex-direction: column;
-    transform: rotate(45deg);
 }
 
 .hollow_row {

@@ -66,7 +66,6 @@ function createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_wid
 function createHollowPreview(strings)
 {
     // Define a tileable hollow preview (hollow_flex)
-    // let hollow_flex = document.getElementById("hollow_flex");
     let hollow_flex = document.createElement("div");
     hollow_flex.classList.add("hollow_flex");
     let cells_in_width = Math.floor(strings / 2);
@@ -117,24 +116,24 @@ function createHollowPreview(strings)
         hollow_flex.appendChild(new_row);
     }
 
-    // Clone 3 more hollow tiles
-    let tile2 = hollow_flex.cloneNode(true); // Deep copy
-    let tile3 = hollow_flex.cloneNode(true); // Deep copy
-    let tile4 = hollow_flex.cloneNode(true); // Deep copy
+    // Clone the hollow tiles to create a bigger preview display
+    let grid_size = 3;
+    let big_flex = document.getElementById("hollow_preview_X_by_X");
+    big_flex.innerHTML = "";
 
-    let hollow_preview_row1 = document.createElement("div");
-    hollow_preview_row1.classList.add("hollow_preview_row");
-    hollow_preview_row1.appendChild(hollow_flex);
-    hollow_preview_row1.appendChild(tile2);
+    for (let i = 0; i < grid_size; i++) {
+        // Define a new row
+        let hollow_preview_row = document.createElement("div");
+        hollow_preview_row.classList.add("hollow_preview_row");
+        
+        for (let j = 0; j < grid_size; j++) {
+            // Define a new cell within the row
+            let tile_copy = hollow_flex.cloneNode(true); // Deep copy
+            hollow_preview_row.appendChild(tile_copy);
+        }
 
-    let hollow_preview_row2 = document.createElement("div");
-    hollow_preview_row2.classList.add("hollow_preview_row");
-    hollow_preview_row2.appendChild(tile3);
-    hollow_preview_row2.appendChild(tile4);
-
-    let big_flex = document.getElementById("hollow_preview_two_by_two");
-    big_flex.appendChild(hollow_preview_row1);
-    big_flex.appendChild(hollow_preview_row2);
+        big_flex.appendChild(hollow_preview_row);
+    }
 
     // Add the on-click event listeners to all cells
     for (let i = 0; i < strings; i++) {
@@ -148,7 +147,14 @@ function createHollowPreview(strings)
 
 // Temp function to toggle between spiral and hollow preview
 function swapStructure()
-{}
+{
+    // Fetch braid previews
+    let spiral_preview = document.getElementById("pattern_preview");
+    let hollow_preview = document.getElementById("hollow_preview");
+
+    spiral_preview.classList.toggle("is_previewed");
+    hollow_preview.classList.toggle("is_previewed");
+}
 
 function adjustPreviewBoxSize(cell_width, row_overlap, rows) {
     let preview_box = document.getElementById("pattern_preview");
@@ -209,6 +215,7 @@ function removeStrings() {
         let preview_section = document.getElementById("pattern_preview");
         preview_section.innerHTML = "";
         createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings);
+        createHollowPreview(strings);
         createDisk(strings);
         let string_display = document.getElementById("string_count");
         string_display.innerText = strings;
@@ -224,6 +231,7 @@ function addStrings() {
         let preview_section = document.getElementById("pattern_preview");
         preview_section.innerHTML = "";
         createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings);
+        createHollowPreview(strings);
         createDisk(strings);
         let string_display = document.getElementById("string_count");
         string_display.innerText = strings;
