@@ -212,15 +212,7 @@ function resizeClassColorsDict(prev_string_count, string_count) {
 function removeStrings() {
     if (strings > 8) {
         strings -= 4;
-        let preview_section = document.getElementById("pattern_preview");
-        preview_section.innerHTML = "";
-        createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings);
-        createHollowPreview(strings);
-        createDisk(strings);
-        let string_display = document.getElementById("string_count");
-        string_display.innerText = strings;
-        resizeClassColorsDict(strings+4, strings);
-        assignClassColors();
+        editStrings(-4);
     }
 }
 
@@ -228,16 +220,22 @@ function removeStrings() {
 function addStrings() {
     if (strings < 40) {
         strings += 4;
-        let preview_section = document.getElementById("pattern_preview");
-        preview_section.innerHTML = "";
-        createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings);
-        createHollowPreview(strings);
-        createDisk(strings);
-        let string_display = document.getElementById("string_count");
-        string_display.innerText = strings;
-        resizeClassColorsDict(strings-4, strings);
-        assignClassColors();
+        editStrings(4);
     }
+}
+
+// Helper function for addStrings() and removeStrings
+function editStrings(stringUpdateValue)
+{
+    let preview_section = document.getElementById("pattern_preview");
+    preview_section.innerHTML = "";
+    createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings);
+    createHollowPreview(strings);
+    createDisk(strings);
+    let string_display = document.getElementById("string_count");
+    string_display.innerText = strings;
+    resizeClassColorsDict(strings-stringUpdateValue, strings);
+    assignClassColors();
 }
 
 let styles = window.getComputedStyle(document.body);
