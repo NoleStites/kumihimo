@@ -152,7 +152,7 @@ function toggleStructureRadios()
     radios.classList.toggle("hide");
 }
 
-// Temp function to toggle between spiral and hollow preview
+// Toggle between spiral and hollow preview
 function swapStructure()
 {
     // Remove current preview
@@ -168,6 +168,9 @@ function swapStructure()
             document.getElementById(`${radio.value}_preview`).classList.toggle("is_previewed");
         }
     }
+
+    determineDiskToDisplay(strings);
+    assignClassColors();
 
     // Hide radios after selection
     toggleStructureRadios();
@@ -248,8 +251,7 @@ function editStrings(stringUpdateValue)
     preview_section.innerHTML = "";
     createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings);
     createHollowPreview(strings);
-    createDisk(strings);
-    createHollowDisk(strings);
+    determineDiskToDisplay(strings);
     let string_display = document.getElementById("string_count");
     string_display.innerText = strings;
     resizeClassColorsDict(strings-stringUpdateValue, strings);
@@ -287,7 +289,7 @@ for (let i = 0; i < strings; i++)
     }
 }
 
-// window.onload = function() {
+window.onload = function() {
     createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings);
     createHollowPreview(strings);
 
@@ -299,4 +301,7 @@ for (let i = 0; i < strings; i++)
 
     // Show default flower pattern
     assignClassColors();
-// }
+
+    // Reset structure radio to spiral
+    this.document.getElementById("spiral").checked = true;
+}

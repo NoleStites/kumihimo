@@ -4,6 +4,28 @@ function toggleDisk() {
     disk_mask.classList.toggle("flex");
 }
 
+// Determines the disk to display depending on the braid structure chosen
+function determineDiskToDisplay(strings) {
+    let radio_btns = document.getElementsByClassName("structure_radio");
+    for (let radio of radio_btns) {
+        if (radio.checked) {
+            switch (radio.value) {
+                case "spiral":
+                    createDisk(strings);
+                    break;
+                case "hollow":
+                    createHollowDisk(strings);
+                    break;
+                // case "chevron":
+                //     createChevronDisk();
+                //     break;
+                default:
+                    console.error("Invalid structure type.");
+            }
+        }
+    }
+}
+
 // Function to create and position segments
 function createDisk(strings) {
     const kumihimoDisk = document.getElementById('disk');
@@ -139,16 +161,19 @@ function createHollowDisk(strings) {
     const rootElement = document.documentElement;
     rootElement.style.setProperty('--segment-width', `${width}%`);
 
-
-    let quarter = strings/4;
-    let prev_class = -1;
     let class_counter = 0;
     for (let i = 0; i < numSegments; i++) {
         // First sub-segment
         let seg1 = document.createElement('div');
         seg1.classList.add('subsegment');
 
-        seg1.classList.add(`cell_${class_counter++}`);
+        let seg_class = (class_counter-1) % strings;
+        if (seg_class < 0) {
+            seg_class = strings + seg_class;
+        }
+        class_counter++;
+        seg1.classList.add(`cell_${seg_class}`);
+        
         seg1.addEventListener("click", function() {assignColorToCell(seg1.classList[1])});
 
         seg1.dataset.segmentIndex = 2*i; // Store the index for easy reference
@@ -157,7 +182,12 @@ function createHollowDisk(strings) {
         let seg2 = document.createElement('div');
         seg2.classList.add('subsegment');
 
-        seg2.classList.add(`cell_${class_counter++}`);
+        seg_class = (class_counter-1) % strings;
+        if (seg_class < 0) {
+            seg_class = strings + seg_class;
+        }
+        class_counter++;
+        seg2.classList.add(`cell_${seg_class}`);
         seg2.addEventListener("click", function() {assignColorToCell(seg2.classList[1])});
 
         seg2.dataset.segmentIndex = 2*i + 1; // Store the index for easy reference
