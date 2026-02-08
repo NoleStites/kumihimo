@@ -101,9 +101,32 @@ body {
     border-radius: 20px;
 }
 
+#structure_button_box {
+    position: relative;
+}
 #structure_button {
     width: fit-content;
-    padding: 5px 0px;
+    padding: 5px 20px;
+    position: relative;
+    z-index: 2;
+}
+.hide {
+    display: none !important;
+}
+#structure_list {
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    position: absolute;
+    bottom: 50%;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 25%;
+    z-index: 1;
+    border: 2px solid black;
+}
+.structure_radio_option {
+    font-size: 18pt;
 }
 
 @media only screen and (max-width: 485px) {
@@ -119,5 +142,8 @@ body {
         font-size: 15pt;
         border-radius: 10px;
         padding: 8px 2px;
+    }
+    .structure_radio_option {
+        font-size: 15pt;
     }
 }

@@ -39,11 +39,13 @@
         <h1 id="page_title">Kumihimo Designer</h1>
 
         <div id="pattern_container">
-            <section id="pattern_preview" class="is_previewed"></section>
+            <section id="spiral_preview" class="is_previewed"></section>
             
             <section id="hollow_preview">
                 <div id="hollow_preview_X_by_X"></div>
             </section>
+
+            <!-- <section id="chevron_preview"></section> -->
         </div>
         <div id="btn_container">
             <div id="string_btns">
@@ -53,7 +55,23 @@
             </div>
             <div id="color_btns">
                 <button onclick="toggleDisk()" class="flex_btn">Show Disk</button>
-                <button onclick="swapStructure()" class="flex_btn">Structure</button>
+                <div id="structure_button_box">
+                    <button id="structure_button" onclick="toggleStructureRadios()" class="flex_btn">Structure</button>
+                    <div id="structure_list" class="hide">
+                        <div class="structure_radio_option">
+                            <input type="radio" id="spiral" name="structure" value="spiral" class="structure_radio" onchange="swapStructure()" checked />
+                            <label for="spiral">Spiral</label>
+                        </div>
+                        <div class="structure_radio_option">
+                            <input type="radio" id="hollow" name="structure" value="hollow" class="structure_radio" onchange="swapStructure()" />
+                            <label for="hollow">Hollow</label>
+                        </div>   
+                        <!-- <div class="structure_radio_option">
+                            <input type="radio" id="chevron" name="structure" value="chevron" class="structure_radio" onchange="swapStructure()" />
+                            <label for="chevron">Chevron</label>
+                        </div>  -->
+                    </div>
+                </div>
                 <button onclick="toggleColors()" class="flex_btn">Change Color</button>
             </div>
         </div>

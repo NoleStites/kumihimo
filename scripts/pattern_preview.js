@@ -1,6 +1,6 @@
 // Spiral preview
 function createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings) {
-    let preview_section = document.getElementById("pattern_preview");
+    let preview_section = document.getElementById("spiral_preview");
     strings /= 4;
 
     // Make a list of class numbers to be assigned to each cell in preview
@@ -145,19 +145,36 @@ function createHollowPreview(strings)
 
 }
 
+// Toggles the visibility of the structure radio buttons
+function toggleStructureRadios()
+{
+    let radios = document.getElementById("structure_list");
+    radios.classList.toggle("hide");
+}
+
 // Temp function to toggle between spiral and hollow preview
 function swapStructure()
 {
-    // Fetch braid previews
-    let spiral_preview = document.getElementById("pattern_preview");
-    let hollow_preview = document.getElementById("hollow_preview");
+    // Remove current preview
+    let previewed = document.getElementsByClassName("is_previewed");
+    for (let preview of previewed) {
+        preview.classList.remove("is_previewed");
+    }
 
-    spiral_preview.classList.toggle("is_previewed");
-    hollow_preview.classList.toggle("is_previewed");
+    // Assign preview to active radio button
+    let radio_btns = document.getElementsByClassName("structure_radio");
+    for (let radio of radio_btns) {
+        if (radio.checked) {
+            document.getElementById(`${radio.value}_preview`).classList.toggle("is_previewed");
+        }
+    }
+
+    // Hide radios after selection
+    toggleStructureRadios();
 }
 
 function adjustPreviewBoxSize(cell_width, row_overlap, rows) {
-    let preview_box = document.getElementById("pattern_preview");
+    let preview_box = document.getElementById("spiral_preview");
 
     // Calculate height
     let new_height;
@@ -227,11 +244,12 @@ function addStrings() {
 // Helper function for addStrings() and removeStrings
 function editStrings(stringUpdateValue)
 {
-    let preview_section = document.getElementById("pattern_preview");
+    let preview_section = document.getElementById("spiral_preview");
     preview_section.innerHTML = "";
     createPatternPreview(columns, rows, cell_overlap, row_overlap, cell_width, strings);
     createHollowPreview(strings);
     createDisk(strings);
+    createHollowDisk(strings);
     let string_display = document.getElementById("string_count");
     string_display.innerText = strings;
     resizeClassColorsDict(strings-stringUpdateValue, strings);
