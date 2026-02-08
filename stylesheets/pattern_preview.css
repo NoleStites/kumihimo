@@ -83,3 +83,9 @@
     border-radius: 50%;
     text-align: center;
 }
+
+@media only screen and (max-width: 485px) {
+    .hollow_cell {
+        width: 30px;
+    }
+}
